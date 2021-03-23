@@ -1,4 +1,4 @@
-# One-Chain
+# Hybrid One-Chain
 
 ## Information
 - Version : 0.1v
@@ -7,6 +7,9 @@
 - Version Upgrade Date : 2021.
 - Recommand Python Version : 3.9.4
 
+## Goal
+- Preparing...
+
 ## Require Environment
 ```
 pip install fastapi
@@ -14,8 +17,11 @@ pip install uvicorn
 pip install Jinja2
 ```
 
+## Code Format
+``` PEP8 ```
+
 ## UML
 ![alt text](image/One-Chain-UML.png)
 
 ## Operation
-- Preparing
+- Preparing...
