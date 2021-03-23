@@ -6,6 +6,13 @@
 - Upgate Date : -
 - Recommand Python Version : 3.9.4
 
+## Require Environment
+```
+pip install fastapi
+pip install uvicorn
+pip install Jinja2
+```
+
 ## UML
 ![alt text](image/One-Chain-UML.png)
 
