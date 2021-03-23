@@ -24,3 +24,6 @@ async def signup(request:Request):
 @app.get("/auth")
 async def auth(request:Request):
     return 0
+
+
+# 자동 시작
