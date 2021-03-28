@@ -1,0 +1,45 @@
+<html>
+
+    <head>
+        <title>DEFINITION</title>
+
+        <script type="text/javascript">
+            function next_block_chain(){
+                var loginform = document.nextchain;
+                var userId = nextchain.user_id.value;
+                var password = nextchain.user_pwd.value;
+                
+                if(!userId || !password){
+                    alert("아이디와 비밀번호를 모두 입력해주세요.")
+                }else{
+                    loginform.submit();
+                }
+            }
+        </script>
+
+    </head>
+
+    <body>
+        내 아이디 : {{user_id}} <br>
+        내 비밀번호 : {{user_pwd}} <br>
+        <form action="/chain/0" method="post">
+            <input type="hidden" name="user_id" value={{user_id}}></input>
+            <input type="hidden" name="user_pwd" value={{user_pwd}}></input>
+            <input type="submit" value="제네시스 블록생성"/><br>
+        </form>
+
+        <form name="nextchain" action="/chain/1" method="post">
+            <input type="hidden" name="user_id" value={{user_id}}></input>
+            <input type="hidden" name="user_pwd" value={{user_pwd}}></input>
+            <input type="hidden" name="data" value="IM CLIENT"></input>
+            <input type="submit" value="다음 블록생성"/><br>
+        </form>
+
+    </body>
+
+    <footer>
+
+    </footer>
+
+
+</html>
