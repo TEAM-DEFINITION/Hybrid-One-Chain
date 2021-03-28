@@ -8,7 +8,8 @@
 - Recommand Python Version : 3.9.4
 
 ## Goal
-- Preparing...
+- Performance of new Oauth
+- Efficiency of data management
 
 ## Require Environment
 ```
