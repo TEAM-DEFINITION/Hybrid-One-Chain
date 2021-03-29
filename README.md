@@ -1,5 +1,8 @@
 # Hybrid One-Chain
 
+## Committer
+- Preparing...
+
 ## Information
 - Version : 0.1v
 - Create Date : 2021.03.19
@@ -16,6 +19,7 @@
 pip install fastapi
 pip install uvicorn
 pip install Jinja2
+pip install pycryptodome
 ```
 
 ## Code Format
