@@ -3,6 +3,35 @@
     <head>
         <title>DEFINITION</title>
 
+        <script type="text/javascript" src="{{ url_for('static', path='/aes_util.js') }}"></script>
+
+        <script type="text/javascript">
+            var g_keySize = 128;
+            var g_iterationCount = 10000;
+            var g_salt = "79752f1d3fd2432043c48e45b35b24645eb826a25c6f1804e9152665c345a552";
+            var g_iv = "2fad5a477d13ecda7f718fbd8a9f0443";
+            var g_passPhrase = "passPhrase";
+
+            window.onload = function() {
+                
+                try {
+                    var resultDiv = document.getElementById("resultDiv");
+                    
+                    var aesUtil = new AesUtil(g_keySize, g_iterationCount);
+                    var encString = aesUtil.encrypt(g_salt, g_iv, g_passPhrase, "pass1234");
+                    var decString = aesUtil.decrypt(g_salt, g_iv, g_passPhrase, encString);
+                    
+                    resultDiv.innerHTML = "encString : " + encString + "<br>" + "decString : " + decString;
+
+                } catch (e) {
+                    alert(e);
+                    return false;
+                }
+
+
+            }
+        </script>
+
         <script type="text/javascript">
             function next_block_chain(){
                 var loginform = document.nextchain;
@@ -21,8 +50,10 @@
     </head>
 
     <body>
-        내 아이디 : {{user_id}} <br>
-        내 비밀번호 : {{user_pwd}} <br>
+        <div>
+            내 아이디 : {{user_id}} <br>
+            내 비밀번호 : {{user_pwd}} <br>
+        </div>
         <!--
         <form action="/chain/0" method="post">
             <input type="hidden" name="user_id" value={{user_id}}></input>
@@ -36,6 +67,16 @@
             보낼 데이터 : <input type="text" name="data"></input>
             <input type="submit" value="다음 블록생성"/><br>
         </form>
+
+        받은 데이터 : {{ server_data }}<br>
+        복호화된 데이터 : {{ decrypted_server_data }}<br>
+        AES 테스트: <div id="resultDiv"></div>
+
+        <!--
+        <form name="refresh">
+            <input type="button" onclick="data_refresh()" value="데이터 새로고침"/><br>
+        </form>
+        -->
 
     </body>
 

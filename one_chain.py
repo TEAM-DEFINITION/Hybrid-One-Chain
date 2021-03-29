@@ -1,4 +1,5 @@
 import hashlib
+import endecrypt
 
 
 def genesis_block_create(user_id):
@@ -46,7 +47,7 @@ def next_block_create(user_id, user_pwd, data):
         "2BD1144CFFE6D3A71A85B1ECFFE4D4EFA50EAD8186731E7FC8EE42FB4F814CE4C31E721FFE9F6DC9D4B2585F15F570045FC6A94EED99A1779E97C64142D3CF41",
         "Authentiacation Complete!!"
     ]
-
+   
     f = open("chain_db\\" + user_id + "_db","r")
     prev_block = f.readlines()
     f.close()
@@ -57,7 +58,14 @@ def next_block_create(user_id, user_pwd, data):
     f.write(str(server_block) + "\n")
     f.close()
 
-    return 0
+    try :
+        # 데이터 암호화
+        result = endecrypt.encrypt(server_block, str(prev_block[-1]))
+    except : 
+        # 실패시 오류 반환
+        result = "서버에서 데이터암호화에 실패하였습니다!"
+    
+    return result
 
 def hash(block):
     result = hashlib.sha512(str(block).encode('utf-8')).hexdigest()

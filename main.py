@@ -66,8 +66,8 @@ async def chain(request:Request, step:str, user_id:str=Form(...), user_pwd:str=F
         print(user_id)
         return templates.TemplateResponse("chaintest.html", {"request":request, "user_id":user_id, "user_pwd":user_pwd})
     elif step == "1" :
-        one_chain.next_block_create(user_id, user_pwd, data)
-        return templates.TemplateResponse("chaintest.html", {"request":request, "user_id":user_id, "user_pwd":user_pwd})
+        result = one_chain.next_block_create(user_id, user_pwd, data)
+        return templates.TemplateResponse("chaintest.html", {"request":request, "user_id":user_id, "user_pwd":user_pwd, "server_data":result})
     return 0
 
 # 체인 검증 모듈
