@@ -10,7 +10,8 @@
                 var password = nextchain.user_pwd.value;
                 
                 if(!userId || !password){
-                    alert("아이디와 비밀번호를 모두 입력해주세요.")
+                    alert("정보가 없습니다")
+                    window.location.href='/';
                 }else{
                     loginform.submit();
                 }
