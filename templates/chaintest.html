@@ -23,16 +23,17 @@
     <body>
         내 아이디 : {{user_id}} <br>
         내 비밀번호 : {{user_pwd}} <br>
+        <!--
         <form action="/chain/0" method="post">
             <input type="hidden" name="user_id" value={{user_id}}></input>
             <input type="hidden" name="user_pwd" value={{user_pwd}}></input>
             <input type="submit" value="제네시스 블록생성"/><br>
         </form>
-
+        -->
         <form name="nextchain" action="/chain/1" method="post">
             <input type="hidden" name="user_id" value={{user_id}}></input>
             <input type="hidden" name="user_pwd" value={{user_pwd}}></input>
-            <input type="hidden" name="data" value="IM CLIENT"></input>
+            보낼 데이터 : <input type="text" name="data"></input>
             <input type="submit" value="다음 블록생성"/><br>
         </form>
 
