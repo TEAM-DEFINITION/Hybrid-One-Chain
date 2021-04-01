@@ -11,7 +11,7 @@ DATA:str
 '''
 
 def genesis_block_create(user_id):
-
+    
     hardcoding = ["USER_ID",
                 "USER_PASSWORD",
                 "DATA"

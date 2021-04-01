@@ -20,6 +20,28 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory='static'), name='static')
 templates = Jinja2Templates(directory='templates')
 
+#########################################################
+
+@app.post("/app/login")
+async def app_login(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
+    chain_module_auth.genesis_block_create(user_id)
+    return "OK"
+
+@app.post("/app/post")
+async def app_post(request:Request, postcode:str=Form(...)):
+    print(postcode)
+    return "OK"
+
+
+
+
+
+
+#########################################################
+
+
+
+
 # 메인
 @app.get("/", tags=["root"])
 async def main(request:Request):
@@ -70,20 +92,7 @@ async def chain(request:Request, step:str, user_id:str=Form(...), user_pwd:str=F
 async def validate(request:Request):
     return 0
 
-#########################################################
 
-@app.post("/apptest")
-async def apptest(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
-    print(user_id)
-    return "123"
-
-
-
-
-
-
-
-#########################################################
 # 자동 시작
 if __name__== "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=55555, reload=True)
