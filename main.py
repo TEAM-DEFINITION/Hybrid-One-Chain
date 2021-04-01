@@ -1,29 +1,20 @@
 from fastapi import FastAPI,Request,Form
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import uvicorn
 # 개발 모듈
 import chain_module_auth
 
 # http://112.156.0.196:55555
 
+class Item(BaseModel):
+    title: str
+
 # Fastapi 객체 선언
 app = FastAPI()
-
-# 리엑트 연동부분(손대지마시오)
-origins = [
-    "http://localhost:3000",
-    "localhost:3000"
-]
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*']
-)
 
 # static management
 app.mount("/static", StaticFiles(directory='static'), name='static')
@@ -79,6 +70,20 @@ async def chain(request:Request, step:str, user_id:str=Form(...), user_pwd:str=F
 async def validate(request:Request):
     return 0
 
+#########################################################
+
+@app.post("/apptest")
+async def apptest(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
+    print(user_id)
+    return "123"
+
+
+
+
+
+
+
+#########################################################
 # 자동 시작
 if __name__== "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=55555, reload=True)
