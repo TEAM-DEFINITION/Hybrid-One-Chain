@@ -2,6 +2,18 @@
 
     <head>
         <title>DEFINITION</title>
+
+        <script type="text/javascript">
+            window.onload = function() {
+                var data = {{ error }};
+                if (data == "404"){
+                    alert("허가되지 않은 접근입니다");
+                    return false;
+                }
+
+            }
+        </script>
+
     </head>
 
     <body>
@@ -11,7 +23,6 @@
             　　　ID : <input name="user_id" type="text" max_length='10'/><br>
             Password : <input name="user_pwd" type="password" max_length='10'/>
             <input type="submit" value="로그인"/><br>
-            {{ error }}
         </form>
     </body>
 

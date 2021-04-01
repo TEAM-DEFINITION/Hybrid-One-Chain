@@ -1,23 +1,31 @@
-import base64, os
-import hmac, binascii
+import os, hashlib
 from Cryptodome.Cipher import AES
+
+'''
+함수 작동하는 방식 써주세요 ^_^
+
+
+'''
+
+def gen_sha256_hashed_key_salt(key):
+    salt = hashlib.sha512(key.encode()).digest()
+    return hashlib.sha512(salt+key.encode()).digest()
 
 
 def encrypt(data, key): 
     data = '@@'.join(data)
     BS = 16
     pad = lambda s: s + (BS - len(s.encode('utf-8')) % BS) * chr(BS - len(s.encode('utf-8')) % BS)
-    raw = pad(data)
-    key = (key.split(",")[-1].replace("']", "")[2:]).encode()
+    pad_data = pad(data)
+    key = gen_sha256_hashed_key_salt((key.split(",")[-1].replace("']", "")[2:]))
     iv = b"2fad5a477d13ecda7f718fbd8a9f0443"
     encryptor = AES.new(key[:16], AES.MODE_CBC, iv[:16])
-    return base64.b64encode(encryptor.encrypt(raw.encode('utf-8')))
+    return encryptor.encrypt(pad_data.encode('utf-8'))
 
 
 def decrypt(enc, key): 
-    enc = base64.b64decode(enc)
     unpad = lambda s: s[:-ord(s[len(s) - 1:])]
-    key = (key.split(",")[-1].replace("']", "")[2:]).encode()
+    key = gen_sha256_hashed_key_salt((key.split(",")[-1].replace("']", "")[2:]))
     iv = b"2fad5a477d13ecda7f718fbd8a9f0443"
     decryptor = AES.new(key[:16], AES.MODE_CBC, iv[:16])
     return str(unpad(decryptor.decrypt(enc)))[2:-1].split('@@')
@@ -41,4 +49,3 @@ if __name__ == '__main__':
         "Authentiacation Complete!!"
     ]
 '''
-   
