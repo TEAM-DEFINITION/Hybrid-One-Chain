@@ -5,6 +5,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
+
+# 테스팅 모듈
+from fastapi.middleware.cors import CORSMiddleware
+
+
 # 개발 모듈
 import chain_module_auth
 
@@ -23,6 +28,23 @@ class RES(BaseModel):
 # Fastapi 객체 선언
 app = FastAPI()
 
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:*",
+    "http://localhost:55555",
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # static management
 app.mount("/static", StaticFiles(directory='static'), name='static')
 templates = Jinja2Templates(directory='templates')
@@ -33,15 +55,7 @@ templates = Jinja2Templates(directory='templates')
 async def app_login(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
     print(user_id)
     chain_module_auth.genesis_block_create(user_id)
-
-    return [{"123":"123"}]
-
-@app.options("/app/login")
-async def app_login(request:Request):
-    print(request.body())
-    chain_module_auth.genesis_block_create("123")
-
-    return [{"123":"123"}]
+    return "OK"
 
 @app.post("/app/post")
 async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), postcode:str=Form(...)):
