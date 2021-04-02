@@ -28,9 +28,9 @@ async def app_login(request:Request, user_id:str=Form(...), user_pwd:str=Form(..
     return "OK"
 
 @app.post("/app/post")
-async def app_post(request:Request, postcode:str=Form(...)):
-    print(postcode)
-    return "OK"
+async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), postcode:str=Form(...)):
+    result = chain_module_auth.next_block_create(user_id, user_pwd, postcode)
+    return result
 
 
 

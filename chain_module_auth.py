@@ -28,6 +28,8 @@ def genesis_block_create(user_id):
 
     return 0
 
+#########################################################################################
+
 def next_block_create(user_id, user_pwd, data):
     
     hardcoding = [user_id,
@@ -52,7 +54,7 @@ def next_block_create(user_id, user_pwd, data):
     # 서버 블록 생성
     server_block = [
         "K-Shield Jr. DEFINITION TEAM",
-        "Authentiacation Complete!!"
+        "StoreAccess"
     ]
    
     f = open("authchain_db\\" + user_id + "_db","r")
