@@ -13,6 +13,13 @@ import chain_module_auth
 class Item(BaseModel):
     title: str
 
+class UserInfo(BaseModel):
+    user_id : str
+    user_pwd : str
+
+class RES(BaseModel):
+    res : str
+
 # Fastapi 객체 선언
 app = FastAPI()
 
@@ -24,8 +31,17 @@ templates = Jinja2Templates(directory='templates')
 
 @app.post("/app/login")
 async def app_login(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
+    print(user_id)
     chain_module_auth.genesis_block_create(user_id)
-    return "OK"
+
+    return [{"123":"123"}]
+
+@app.options("/app/login")
+async def app_login(request:Request):
+    print(request.body())
+    chain_module_auth.genesis_block_create("123")
+
+    return [{"123":"123"}]
 
 @app.post("/app/post")
 async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), postcode:str=Form(...)):
@@ -33,11 +49,7 @@ async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...
     return result
 
 
-
-
-
-
-#########################################################
+########################################################################################
 
 
 

@@ -1,5 +1,6 @@
 import hashlib
 import endecrypt
+import ast
 
 '''
 
@@ -45,8 +46,16 @@ def next_block_create(user_id, user_pwd, data):
     except:
         return 0
 
-    
-    hardcoding.append(hashlib.sha512(str(prev_block[-1]).encode('utf-8')).hexdigest())
+    # 이전이전 데이터 Formating
+    prev_data = ast.literal_eval(prev_block[-1])
+    data = ""
+    for i in prev_data:
+        data = data + i + "|"
+    print("사용자가 보낸 블럭의 이전 데이터 : "+data)
+    hardcoding.append(hashlib.sha512(data.encode('utf-8')).hexdigest())
+
+
+
     f = open("authchain_db\\" + user_id + "_db","a")
     f.write("\n" + str(hardcoding))
     f.close()
@@ -61,10 +70,21 @@ def next_block_create(user_id, user_pwd, data):
     prev_block = f.readlines()
     f.close()
 
-    
-    server_block.append(hashlib.sha512(str(prev_block[-1]).encode('utf-8')).hexdigest())
+    # 이전 데이터 Formating
+    prev_data = ast.literal_eval(prev_block[-1])
+    data = ""
+    for i in prev_data:
+        data = data + i + "|"
+    print("서버가 만들 블럭의 이전 데이터 : "+data)
+
+    server_block.append(hashlib.sha512(data.encode('utf-8')).hexdigest())
     f = open("authchain_db\\" + user_id + "_db","a")
     f.write("\n" + str(server_block))
+    f.close()
+
+    # 다시 최종 블럭의 데이터 가져오기
+    f = open("authchain_db\\" + user_id + "_db","r")
+    prev_block = f.readlines()
     f.close()
 
     try :
