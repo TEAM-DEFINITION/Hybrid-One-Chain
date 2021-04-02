@@ -22,7 +22,7 @@ def genesis_block_create(user_id):
     new_hash = hash(hardcoding)
     hardcoding.append(new_hash)
 
-    f.write(str(hardcoding) + "\n")
+    f.write("\n" + str(hardcoding))
     f.close()
 
 
@@ -46,13 +46,12 @@ def next_block_create(user_id, user_pwd, data):
     
     hardcoding.append(hashlib.sha512(str(prev_block[-1]).encode('utf-8')).hexdigest())
     f = open("authchain_db\\" + user_id + "_db","a")
-    f.write(str(hardcoding) + "\n")
+    f.write("\n" + str(hardcoding))
     f.close()
 
     # 서버 블록 생성
     server_block = [
         "K-Shield Jr. DEFINITION TEAM",
-        "2BD1144CFFE6D3A71A85B1ECFFE4D4EFA50EAD8186731E7FC8EE42FB4F814CE4C31E721FFE9F6DC9D4B2585F15F570045FC6A94EED99A1779E97C64142D3CF41",
         "Authentiacation Complete!!"
     ]
    
@@ -63,12 +62,13 @@ def next_block_create(user_id, user_pwd, data):
     
     server_block.append(hashlib.sha512(str(prev_block[-1]).encode('utf-8')).hexdigest())
     f = open("authchain_db\\" + user_id + "_db","a")
-    f.write(str(server_block) + "\n")
+    f.write("\n" + str(server_block))
     f.close()
 
     try :
         # 데이터 암호화
-        result = endecrypt.encrypt(server_block, str(prev_block[-1]))
+        result = endecrypt.AESCipher(prev_block[-1]).encrypt(str(server_block))
+        # result = endecrypt.encrypt(server_block, prev_block[-1])
     except : 
         # 실패시 오류 반환
         result = "서버에서 데이터암호화에 실패하였습니다!"
