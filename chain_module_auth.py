@@ -18,7 +18,7 @@ def genesis_block_create(user_id):
                 "DATA"
     ]
 
-    f = open("authchain_db\\" + user_id + "_db","w")
+    f = open("db_user\\" + user_id + "_db","w")
 
     new_hash = hash(hardcoding)
     hardcoding.append(new_hash)
@@ -40,7 +40,7 @@ def next_block_create(user_id, user_pwd, data):
 
     # 회원가입된 체인인지 확인
     try:
-        f = open("authchain_db\\" + user_id + "_db","r")
+        f = open("db_user\\" + user_id + "_db","r")
         prev_block = f.readlines()
         f.close()
     except:
@@ -56,7 +56,7 @@ def next_block_create(user_id, user_pwd, data):
 
 
 
-    f = open("authchain_db\\" + user_id + "_db","a")
+    f = open("db_user\\" + user_id + "_db","a")
     f.write("\n" + str(hardcoding))
     f.close()
 
@@ -66,7 +66,7 @@ def next_block_create(user_id, user_pwd, data):
         "StoreAccess"
     ]
    
-    f = open("authchain_db\\" + user_id + "_db","r")
+    f = open("db_user\\" + user_id + "_db","r")
     prev_block = f.readlines()
     f.close()
 
@@ -78,12 +78,12 @@ def next_block_create(user_id, user_pwd, data):
     print("서버가 만들 블럭의 이전 데이터 : "+data)
 
     server_block.append(hashlib.sha512(data.encode('utf-8')).hexdigest())
-    f = open("authchain_db\\" + user_id + "_db","a")
+    f = open("db_user\\" + user_id + "_db","a")
     f.write("\n" + str(server_block))
     f.close()
 
     # 다시 최종 블럭의 데이터 가져오기
-    f = open("authchain_db\\" + user_id + "_db","r")
+    f = open("db_user\\" + user_id + "_db","r")
     prev_block = f.readlines()
     f.close()
 
@@ -105,7 +105,7 @@ def check(user_id):
 
     # id만 체크함(수정필요)
     try:
-        f = open("authchain_db\\" + user_id + "_db","r")
+        f = open("db_user\\" + user_id + "_db","r")
         prev_block = f.readlines()
         f.close()
     except:

@@ -26,7 +26,7 @@ class AESCipher:
             self.aes_key.append(hex(parse))
 
     def encrypt( self, raw ):
-        # 이전 데이터 Formating
+        # 데이터 Formating
         prev_data = ast.literal_eval(raw)
         data = ""
         for i in prev_data:
