@@ -46,12 +46,19 @@ templates = Jinja2Templates(directory='templates')
 
 #########################################################
 
+# 회원가입
+@app.post("/app/signup")
+async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
+    result = chain_module_auth.next_block_create(user_id, user_pwd)
+    return "OK"
+
+# 로그인
 @app.post("/app/login")
 async def app_login(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
-    print(user_id)
     chain_module_auth.genesis_block_create(user_id)
     return "OK"
 
+# 출입
 @app.post("/app/post")
 async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), postcode:str=Form(...)):
     result = chain_module_auth.next_block_create(user_id, user_pwd, postcode)
