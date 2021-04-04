@@ -5,33 +5,16 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
-
-# 테스팅 모듈
-from fastapi.middleware.cors import CORSMiddleware
-
-
-# 개발 모듈
-import chain_module_auth
+from chain_module_user import user
 
 # http://112.156.0.196:55555
-
-class Item(BaseModel):
-    title: str
-
-class UserInfo(BaseModel):
-    user_id : str
-    user_pwd : str
-
-class RES(BaseModel):
-    res : str
-
-# Fastapi 객체 선언
+# Fastapi function start
 app = FastAPI()
 
+# CORS Setting
 origins = [
     "*",
 ]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -44,24 +27,23 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory='static'), name='static')
 templates = Jinja2Templates(directory='templates')
 
-#########################################################
-
-# 회원가입
+# API Management
+# Signup API
 @app.post("/app/signup")
 async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
-    result = chain_module_auth.next_block_create(user_id, user_pwd)
+    user().genesis_block_create(user_id)
     return "OK"
 
-# 로그인
+# Login API
 @app.post("/app/login")
 async def app_login(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
-    chain_module_auth.genesis_block_create(user_id)
+    user().genesis_block_create(user_id)
     return "OK"
 
-# 출입
+# Post Access API
 @app.post("/app/post")
 async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), postcode:str=Form(...)):
-    result = chain_module_auth.next_block_create(user_id, user_pwd, postcode)
+    result = user().next_block_create(user_id, user_pwd, postcode)
     return result
 
 
@@ -69,7 +51,7 @@ async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...
 
 
 
-
+# Test API Management
 # 메인
 @app.get("/", tags=["root"])
 async def main(request:Request):
@@ -121,6 +103,7 @@ async def validate(request:Request):
     return 0
 
 
+########################################################################################
 # 자동 시작
 if __name__== "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=55555, reload=True)
