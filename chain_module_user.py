@@ -30,7 +30,7 @@ class user :
         data = ""
         for i in genesis_block:
             data = data + i + "|"
-        print("제네시스블럭 : " + data)
+        # print("제네시스블럭 : " + data)
         genesis_block.append(hashlib.sha512(data.encode('utf-8')).hexdigest())
 
         f.write("\n" + str(genesis_block))
@@ -47,6 +47,7 @@ class user :
                     data
         ]
 
+
         # 회원가입된 체인인지 확인
         try:
             f = open("db_user\\" + user_id + "_db","r")
@@ -57,11 +58,14 @@ class user :
 
         # 이전이전 데이터 Formating
         prev_data = ast.literal_eval(prev_block[-1])
-        data = ""
+        datas = ""
         for i in prev_data:
-            data = data + str(i) + "|"
-        print("사용자가 보낸 블럭의 이전 데이터 : "+data)
-        hardcoding.append(hashlib.sha512(data.encode('utf-8')).hexdigest())
+            datas = datas + str(i) + "|"
+        # print("사용자가 보낸 블럭의 이전 데이터 : "+data)
+        hardcoding.append(hashlib.sha512(datas.encode('utf-8')).hexdigest())
+
+        # Test
+        endecrypt.FerCipher(prev_block[-1]).decrypt(data)
 
 
 
@@ -84,7 +88,7 @@ class user :
         data = ""
         for i in prev_data:
             data = data + i + "|"
-        print("서버가 만들 블럭의 이전 데이터 : "+data)
+        # print("서버가 만들 블럭의 이전 데이터 : "+data)
 
         server_block.append(hashlib.sha512(data.encode('utf-8')).hexdigest())
         f = open("db_user\\" + user_id + "_db","a")
@@ -96,13 +100,9 @@ class user :
         prev_block = f.readlines()
         f.close()
 
-        try :
-            # 데이터 암호화
-            result = endecrypt.AESCipher(prev_block[-1]).encrypt(str(server_block))
-            # result = endecrypt.encrypt(server_block, prev_block[-1])
-        except : 
-            # 실패시 오류 반환
-            result = "서버에서 데이터암호화에 실패하였습니다!"
+        # 데이터 암호화
+        result = endecrypt.FerCipher(prev_block[-2]).encrypt(str(server_block))
+        # result = endecrypt.encrypt(server_block, prev_block[-1])
         
         return result
 
