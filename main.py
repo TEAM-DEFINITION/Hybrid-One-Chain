@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
 from chain_module_user import user
+from endecrypt import FerCipher
 
 # http://112.156.0.196:55555
 # Fastapi function start
@@ -52,6 +53,17 @@ async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...
 
 
 # Test API Management
+
+@app.get("/test")
+async def test(request:Request):
+    return FerCipher().encrypt()
+
+
+
+
+
+
+
 # 메인
 @app.get("/", tags=["root"])
 async def main(request:Request):
