@@ -48,13 +48,10 @@ class user :
         ]
 
 
-        # 회원가입된 체인인지 확인
-        try:
-            f = open("db_user\\" + user_id + "_db","r")
-            prev_block = f.readlines()
-            f.close()
-        except:
-            return 0
+
+        f = open("db_user\\" + user_id + "_db","r")
+        prev_block = f.readlines()
+        f.close()
 
         # 이전이전 데이터 Formating
         prev_data = ast.literal_eval(prev_block[-1])
