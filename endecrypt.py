@@ -56,7 +56,7 @@ class FerCipher:
         self.key = key
         # 키 파싱
         self.key = ast.literal_eval(self.key)
-        # print(self.key[-1][:32])
+        print(self.key[-1][:32])
         self.key = self.key[-1][:32].encode('utf-8')
         self.key = base64.urlsafe_b64encode(self.key)
 

@@ -62,6 +62,7 @@ class user :
         hardcoding.append(hashlib.sha512(datas.encode('utf-8')).hexdigest())
 
         # Test
+        print(prev_block[-1])
         endecrypt.FerCipher(prev_block[-1]).decrypt(data)
 
 
