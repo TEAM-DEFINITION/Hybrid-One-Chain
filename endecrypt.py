@@ -57,7 +57,9 @@ class FerCipher:
         # 키 파싱
         self.key = ast.literal_eval(self.key)
         self.key = self.key[-1][:32].encode('utf-8')
+        print("키변환" + str(self.key))
         self.key = base64.urlsafe_b64encode(self.key)
+        print("키변환끝" + str(self.key))
 
     def encrypt(self, data):
         print("암호화 키값 : " + str(self.key))
@@ -70,7 +72,6 @@ class FerCipher:
     def decrypt(self, data):
         print("복호화 키값 : " + str(self.key))
         print("복호화할 데이터 : " + str(data.encode()))
-        print(bytes(data, encoding='utf-8'))
         cipher_suite = Fernet(self.key)
         plain_text = cipher_suite.decrypt(data.encode())
         print("유저로부터 받은 데이터 : " + str(plain_text))
