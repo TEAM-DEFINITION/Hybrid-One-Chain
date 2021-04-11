@@ -3,6 +3,7 @@ from cryptography.fernet import Fernet
 import base64
 #import ast
 import json
+import module_postcode
 
 '''
 
@@ -36,5 +37,9 @@ class FerCipher:
         cipher_suite = Fernet(self.key)
         plain_text = cipher_suite.decrypt(data.encode())
         print("유저로부터 받은 데이터 : " + str(plain_text))
+
+        # 주소확인 테스팅 시작!!
+        print("사용자가 방문할 장소 : " + module_postcode.check(plain_text.decode('utf-8').split("|")[2]))
+
         return plain_text.decode('utf-8')
 
