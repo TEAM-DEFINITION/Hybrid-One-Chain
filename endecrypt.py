@@ -55,8 +55,7 @@ class FerCipher:
     def __init__(self, key):
         self.key = key
         # 키 파싱
-        self.key = ast.literal_eval(self.key)
-        self.key = self.key[-1][:32].encode('utf-8')
+        self.key = self.key[:32].encode('utf-8')
         print("키변환" + str(self.key))
         self.key = base64.urlsafe_b64encode(self.key)
         print("키변환끝" + str(self.key))
@@ -75,5 +74,5 @@ class FerCipher:
         cipher_suite = Fernet(self.key)
         plain_text = cipher_suite.decrypt(data.encode())
         print("유저로부터 받은 데이터 : " + str(plain_text))
-        return 0
+        return plain_text.decode('utf-8')
 
