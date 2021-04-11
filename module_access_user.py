@@ -40,7 +40,7 @@ class user :
 
         # 이전 블록의 해시값을 사용자 블록에 쓰기
         prev_data = prev_block[-1]
-        result = endecrypt.FerCipher(prev_data.split("|")[3]).decrypt(data)
+        result = module_endecrypt.FerCipher(prev_data.split("|")[3]).decrypt(data)
         new_block = result + hashlib.sha512(prev_data.encode('utf-8')).hexdigest() + "|"
         f = open("db_user\\" + user_id + "_db","a")
         f.write("\n" + new_block)
@@ -67,5 +67,5 @@ class user :
         f.close()
 
         # 보낼 데이터를 n-1번째 체인의 해시값으로 암호화
-        result = endecrypt.FerCipher(prev_block[-2].split("|")[3]).encrypt(server_block)
+        result = module_endecrypt.FerCipher(prev_block[-2].split("|")[3]).encrypt(server_block)
         return result
