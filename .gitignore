@@ -1,6 +1,5 @@
 # Database
 db_user/
-db_store/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
