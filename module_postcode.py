@@ -5,7 +5,6 @@ def check(postcode):
     # 기존 가맹점 목록 불러오기
     f = open("db_store\\postcode","r", encoding="UTF8")
     prev_block = f.readlines()
-    print(prev_block)
     f.close()
 
     for i in prev_block:
@@ -13,4 +12,4 @@ def check(postcode):
             pass
         else:
             return i.split("|")[1]
-    return "잘못된 포스트코드입니다"
+    return "00000"
