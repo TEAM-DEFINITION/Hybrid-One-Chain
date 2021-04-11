@@ -28,10 +28,8 @@ pip install pycryptodome
 ## Code Format
 ``` Unknown ```
 
-## Operation
-- Response index
-- Basic login function
-- Create authchain
+## Function
+- Electronic access list chain
 
 ## Start
 ```

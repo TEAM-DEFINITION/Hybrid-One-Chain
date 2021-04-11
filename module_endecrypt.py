@@ -9,9 +9,10 @@ import json
 Encrypt Mode : Fernet
 Decrypt Mode : Fernet
 
+Key size : 32bytes
+
 '''
 class FerCipher:
-    # key = 32 bytes
 
     def __init__(self, key):
         self.key = key

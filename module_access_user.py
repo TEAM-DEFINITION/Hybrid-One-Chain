@@ -1,5 +1,5 @@
 import hashlib
-import endecrypt
+import module_endecrypt
 import ast
 
 '''
