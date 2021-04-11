@@ -25,7 +25,7 @@ class user :
         genesis_block = "USER_ID|USER_PASSWORD|DATA|"
         genesis_block = genesis_block + hashlib.sha512(genesis_block.encode('utf-8')).hexdigest() +"|"
 
-        f = open("db_user\\" + user_id + "_db","w")
+        f = open("db_user\\" + user_id + "_db","w", encoding="UTF8" )
         f.write("\n" + genesis_block)
         f.close()
 
@@ -35,7 +35,7 @@ class user :
     def next_block_create(self, user_id, user_pwd, data):
 
         # 이전 블록 읽어오기
-        f = open("db_user\\" + user_id + "_db","r")
+        f = open("db_user\\" + user_id + "_db","r", encoding="UTF8")
         prev_block = f.readlines()
         f.close()
 
@@ -43,7 +43,7 @@ class user :
         prev_data = prev_block[-1]
         result, place, time = module_endecrypt.FerCipher(prev_data.split("|")[3]).decrypt(data)
         new_block = result + hashlib.sha512(prev_data.encode('utf-8')).hexdigest() + "|"
-        f = open("db_user\\" + user_id + "_db","a")
+        f = open("db_user\\" + user_id + "_db","a", encoding="UTF8")
         f.write("\n" + new_block)
         f.close()
 
@@ -51,19 +51,19 @@ class user :
         server_block = "HybridAccessServer|" + place + "|" + time + "|"
 
         # 새로운 블록을 쓰기 위해 수정된 체인 읽기
-        f = open("db_user\\" + user_id + "_db","r")
+        f = open("db_user\\" + user_id + "_db","r", encoding="UTF8")
         prev_block = f.readlines()
         f.close()
 
         # 사용자 블록의 해시값을 추출하여 추가
         prev_data = prev_block[-1]
         server_block = server_block + hashlib.sha512(prev_data.encode('utf-8')).hexdigest() + "|"
-        f = open("db_user\\" + user_id + "_db","a")
+        f = open("db_user\\" + user_id + "_db","a", encoding="UTF8")
         f.write("\n" + server_block)
         f.close()
 
         # 최종 체인의 정보를 읽어옴
-        f = open("db_user\\" + user_id + "_db","r")
+        f = open("db_user\\" + user_id + "_db","r", encoding="UTF8")
         prev_block = f.readlines()
         f.close()
 
