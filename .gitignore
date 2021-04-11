@@ -4,6 +4,7 @@ db_user/
 # Unuse
 templates/
 static/
+trash/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
