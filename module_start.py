@@ -33,14 +33,14 @@ app.add_middleware(
 # Signup API
 @app.post("/app/signup")
 async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
-    user().genesis_block_create(user_id)
-    return "OK"
+    result = user().genesis_block_create(user_id,user_pwd)
+    return result
 
 # Login API
 @app.post("/app/login")
 async def app_login(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
-    user().genesis_block_create(user_id)
-    return "OK"
+    result = user().login(user_id, user_pwd)
+    return result
 
 # Post Access API
 @app.post("/app/post")

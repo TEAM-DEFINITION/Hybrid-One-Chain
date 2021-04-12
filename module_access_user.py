@@ -2,6 +2,9 @@ import hashlib
 import module_endecrypt
 import ast
 import time
+import os
+
+
 
 '''
 
@@ -19,17 +22,31 @@ PREV_HASH:str
 class user :
     def __init__(self):
         pass
+
+    def login(self, user_id, user_pwd):
+        f = open("db_user\\" + user_id + "_db","r", encoding="UTF8")
+        temp = f.readlines()
+        f.close()
+        print( temp[1].split("|")[0])
+        if temp[1].split("|")[0] == user_id :
+            return 200
+        else :
+            return 401
     
-    def genesis_block_create(self, user_id):
+    def genesis_block_create(self, user_id, user_pwd):
+
+        # 중복확인
+        if os.path.isfile("./db_user/" + user_id +"_db") :
+            return 401
         
-        genesis_block = "USER_ID|USER_PASSWORD|DATA|"
+        genesis_block = user_id + "|" + user_pwd +  "|DATA|"
         genesis_block = genesis_block + hashlib.sha512(genesis_block.encode('utf-8')).hexdigest() +"|"
 
         f = open("db_user\\" + user_id + "_db","w", encoding="UTF8" )
         f.write("\n" + genesis_block)
         f.close()
 
-        return 0
+        return 200
 
 
     def next_block_create(self, user_id, user_pwd, data):
