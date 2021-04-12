@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
+import json
 
 from module_access_user import user
 
@@ -29,7 +30,7 @@ app.add_middleware(
 #templates = Jinja2Templates(directory='templates')
 
 
-# API Management
+# Access API Management
 # Signup API
 @app.post("/app/signup")
 async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
@@ -50,6 +51,7 @@ async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...
 
 
 ########################################################################################
+
 
 # 자동 시작
 if __name__== "__main__":
