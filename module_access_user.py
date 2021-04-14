@@ -24,14 +24,19 @@ class user :
         pass
 
     def login(self, user_id, user_pwd):
+
+        if os.path.isfile("./db_user/" + user_id +"_db") == False :
+            return 401
+
+
         f = open("db_user\\" + user_id + "_db","r", encoding="UTF8")
         temp = f.readlines()
         f.close()
         print( temp[1].split("|")[0])
-        if temp[1].split("|")[0] == user_id :
+        if temp[1].split("|")[1] == user_pwd :
             return 200
         else :
-            return 401
+            return 402
     
     def genesis_block_create(self, user_id, user_pwd):
 
