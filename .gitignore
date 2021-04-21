@@ -1,6 +1,9 @@
 # Database
 db_user/
 
+# Key
+rsa/
+
 # Unuse
 templates/
 static/

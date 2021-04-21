@@ -38,13 +38,13 @@ class user :
         else :
             return 402
     
-    def genesis_block_create(self, user_id, user_pwd):
+    def genesis_block_create(self, user_id, user_pwd, clientrandom):
 
         # 중복확인
         if os.path.isfile("./db_user/" + user_id +"_db") :
             return 401
         
-        genesis_block = user_id + "|" + user_pwd +  "|DATA|"
+        genesis_block = user_id + "|" + user_pwd +  "|" + clientrandom +"|"
         genesis_block = genesis_block + hashlib.sha512(genesis_block.encode('utf-8')).hexdigest() +"|"
 
         f = open("db_user\\" + user_id + "_db","w", encoding="UTF8" )
