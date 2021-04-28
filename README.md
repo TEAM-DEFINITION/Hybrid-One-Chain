@@ -1,21 +1,19 @@
-# Hybrid One-Chain
+# Hybrid Access Service Server
 
 ## Committer
 - Park HyeonSeong
-- Choi JinHo
-- 
 
 ## Information
-- Version : 0.1v
+- Version : 0.9.0 miner version
 - Create Date : 2021.03.19
-- Upgate Date : 2021.04.11
-- Version Upgrade Date : 2021.
+- Upgate Date : 2021.04.28
+- Version Upgrade Date : 2021.04.28 [0.1 -> 0.9.0]
 - Recommand Python Version : 3.9.4
 - Recommand Fastapi Version : 
 
 ## Goal
 - Performance of new Oauth
-- Efficiency of data management
+- Encrypted network session
 
 ## Require Environment
 ```
@@ -33,5 +31,5 @@ pip install pycryptodome
 
 ## Start
 ```
-.\ > main.py
+.\ > python module_start.py
 ```
