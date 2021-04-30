@@ -9,7 +9,6 @@ import json
 
 from module_access_user import user
 
-# http://112.156.0.196:55555
 # Fastapi function start
 app = FastAPI()
 
@@ -33,20 +32,20 @@ app.add_middleware(
 # Access API Management
 # Signup API
 @app.post("/app/signup")
-async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), clientrandom:str=Form(...)):
+async def appSignup(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), clientrandom:str=Form(...)):
 
     result = user().genesis_block_create(user_id,user_pwd, clientrandom)
     return result
 
 # Login API
 @app.post("/app/login")
-async def app_login(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
+async def appLogin(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
     result = user().login(user_id, user_pwd)
     return result
 
 # Post Access API
 @app.post("/app/post")
-async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), postcode:str=Form(...)):
+async def appPost(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), postcode:str=Form(...)):
     result = user().next_block_create(user_id, user_pwd, postcode)
     return result
 
@@ -54,7 +53,11 @@ async def app_post(request:Request, user_id:str=Form(...), user_pwd:str=Form(...
 ########################################################################################
 
 
-# 자동 시작
+# 글로벌 자동 시작
 if __name__== "__main__":
     uvicorn.run("module_start:app", host="0.0.0.0", port=55555, reload=True)
+
+# 로컬 자동 시작 // 127.0.0.1:8000 or 10.0.2.2:8000
+#if __name__== "__main__":
+#    uvicorn.run("module_start:app", reload=True)
     

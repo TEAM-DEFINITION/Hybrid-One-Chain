@@ -1,13 +1,15 @@
-# Database
-db_user/
+# Database files
+db_user/*
 
-# Key
-rsa/
+# Key files
+rsa/*
 
-# Unuse
+# Unuse folder
 templates/
 static/
 trash/
+
+############################################################
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

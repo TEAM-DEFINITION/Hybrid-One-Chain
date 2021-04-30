@@ -6,7 +6,7 @@
 ## Information
 - Version : 0.9.0 miner version
 - Create Date : 2021.03.19
-- Upgate Date : 2021.04.28
+- Upgate Date : 2021.04.30
 - Version Upgrade Date : 2021.04.28 [0.1 -> 0.9.0]
 - Recommand Python Version : 3.9.4
 - Recommand Fastapi Version : 
