@@ -32,8 +32,8 @@ class user :
         f = open("db_user\\" + user_id + "_db","r", encoding="UTF8")
         temp = f.readlines()
         f.close()
-        print( temp[1].split("|")[0])
-        if temp[1].split("|")[1] == user_pwd :
+
+        if temp[1].split("|")[1] == hashlib.sha512(user_pwd.encode('utf-8')).hexdigest() :
             return 200
         else :
             return 402
@@ -44,7 +44,9 @@ class user :
         if os.path.isfile("./db_user/" + user_id +"_db") :
             return 401
         
-        genesis_block = user_id + "|" + user_pwd +  "|" + clientrandom +"|"
+        hashedPassword = hashlib.sha512(user_pwd.encode('utf-8')).hexdigest()
+
+        genesis_block = user_id + "|" + hashedPassword +  "|" + clientrandom +"|"
         genesis_block = genesis_block + hashlib.sha512(genesis_block.encode('utf-8')).hexdigest() +"|"
 
         f = open("db_user\\" + user_id + "_db","w", encoding="UTF8" )
