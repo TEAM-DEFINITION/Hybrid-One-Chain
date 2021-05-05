@@ -16,6 +16,10 @@
 - 네트워크 데이터보호
 
 ## 실행
-    .\> python module_start
+    .\> python module_start.py
     # 에러1
         db_store폴더 등 해당 폴더가 없는 경우
+
+## 패치내역
+- 0.9.1
+    - 패치 예정중
