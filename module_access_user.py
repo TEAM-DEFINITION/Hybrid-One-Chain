@@ -25,6 +25,7 @@ class user :
 
     def login(self, user_id, user_pwd):
 
+        # 아이디 확인
         if os.path.isfile("./db_user/" + user_id +"_db") == False :
             return 401
 
@@ -33,6 +34,7 @@ class user :
         temp = f.readlines()
         f.close()
 
+        # 비밀번호 확인
         if temp[1].split("|")[1] == hashlib.sha512(user_pwd.encode('utf-8')).hexdigest() :
             return 200
         else :
@@ -40,7 +42,7 @@ class user :
     
     def genesis_block_create(self, user_id, user_pwd, clientrandom):
 
-        # 중복확인
+        # 아이디 중복 확인
         if os.path.isfile("./db_user/" + user_id +"_db") :
             return 401
         
