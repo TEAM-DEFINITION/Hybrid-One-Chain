@@ -1,5 +1,7 @@
 import os, hashlib
 from cryptography.fernet import Fernet
+from crypto.PublicKey import RSA
+import rsa
 import base64
 #import ast
 import json
@@ -8,15 +10,6 @@ import datetime
 
 from module_recovery import *
 
-
-'''
-
-Encrypt Mode : Fernet
-Decrypt Mode : Fernet
-
-Key size : 32bytes
-
-'''
 class FerCipher:
 
     def __init__(self, key):
@@ -38,3 +31,15 @@ class FerCipher:
             LOGING.cipher()
         return plain_text.decode('utf-8'), module_postcode.check(plain_text.decode('utf-8').split("|")[2]), str(datetime.datetime.now())
 
+class RSA_Cipher:
+    
+    def __init__(self):
+        pass
+    
+    def encrypt(self):
+        privateKeyBytes = open('rsa\\private.pem', 'rb').read()
+        rsa.PublicKey.load_pkcs1_openssl_pem(keyfile=privateKeyBytes)
+
+    def decrypt(self):
+        publicKeyBytes = open('rsa\\receiver.pem', 'rb').read()
+        rsa.PrivateKey._load_pkcs1_pem(keyfile=publicKeyBytes)
