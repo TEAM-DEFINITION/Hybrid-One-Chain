@@ -1,6 +1,5 @@
 import os, hashlib
 from cryptography.fernet import Fernet
-from crypto.PublicKey import RSA
 import rsa
 import base64
 #import ast
