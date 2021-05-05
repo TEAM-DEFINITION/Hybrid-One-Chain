@@ -55,7 +55,7 @@ async def appPost(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)
 
 # 글로벌 자동 시작
 if __name__== "__main__":
-    uvicorn.run("module_start:app", host="0.0.0.0", port=55555, reload=True)
+    uvicorn.run("module_start:app", reload=True)
 
 # 로컬 자동 시작 // 127.0.0.1:8000 or 10.0.2.2:8000
 #if __name__== "__main__":
