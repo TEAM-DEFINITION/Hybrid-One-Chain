@@ -68,6 +68,8 @@ class user :
         # 이전 블록의 해시값을 사용자 블록에 쓰기
         prev_data = prev_block[-1]
         result, place, time = module_endecrypt.FerCipher(prev_data.split("|")[3]).decrypt(data)
+
+        
         new_block = result + hashlib.sha512(prev_data.encode('utf-8')).hexdigest() + "|"
         f = open("db_user\\" + user_id + "_db","a", encoding="UTF8")
         f.write("\n" + new_block)

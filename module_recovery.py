@@ -2,5 +2,13 @@
 
 class RECOVERY() :
 
-    def user(self,):
+    def userAll(self,):
+        pass
+
+    def userPart(self,):
+        pass
+
+class LOGING() :
+
+    def decryptError(self,):
         pass
