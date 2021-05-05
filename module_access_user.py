@@ -4,22 +4,7 @@ import ast
 import time
 import os
 
-
-
-'''
-
-[db_user]
-FileName : {{user_id}}_db
-
-[variable]
-USER_ID:str
-USER_PASSWORD:str
-DATA:str
-PREV_HASH:str
-
-'''
-
-class user :
+class USER :
     def __init__(self):
         pass
 

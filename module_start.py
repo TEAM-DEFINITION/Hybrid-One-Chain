@@ -7,7 +7,7 @@ from pydantic import BaseModel
 import uvicorn
 import json
 
-from module_access_user import user
+from module_access_user import USER
 
 # Fastapi function start
 app = FastAPI()
@@ -34,19 +34,19 @@ app.add_middleware(
 @app.post("/app/signup")
 async def appSignup(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), clientrandom:str=Form(...)):
 
-    result = user().genesis_block_create(user_id,user_pwd, clientrandom)
+    result = USER().genesis_block_create(user_id,user_pwd, clientrandom)
     return result
 
 # Login API
 @app.post("/app/login")
 async def appLogin(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)):
-    result = user().login(user_id, user_pwd)
+    result = USER().login(user_id, user_pwd)
     return result
 
 # Post Access API
 @app.post("/app/post")
 async def appPost(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), postcode:str=Form(...)):
-    result = user().next_block_create(user_id, user_pwd, postcode)
+    result = USER().next_block_create(user_id, user_pwd, postcode)
     return result
 
 
