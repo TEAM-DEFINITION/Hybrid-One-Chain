@@ -8,6 +8,7 @@ import uvicorn
 import json
 
 from module_access_user import USER
+from module_endecrypt import RSA_Cipher
 
 # Fastapi function start
 app = FastAPI()
@@ -32,8 +33,8 @@ app.add_middleware(
 # Access API Management
 # Signup API
 @app.post("/app/signup")
-async def appSignup(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), clientrandom:str=Form(...)):
-
+async def appSignup(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), clientrandom:str=Form(...), publickey:str=For(...)):
+    print(publickey)
     result = USER().genesis_block_create(user_id,user_pwd, clientrandom)
     return result
 
@@ -49,6 +50,10 @@ async def appPost(request:Request, user_id:str=Form(...), user_pwd:str=Form(...)
     result = USER().next_block_create(user_id, user_pwd, postcode)
     return result
 
+@app.get('/test')
+async def test(request:Request):
+    RSA_Cipher().encrypt()
+    return 0
 
 ########################################################################################
 

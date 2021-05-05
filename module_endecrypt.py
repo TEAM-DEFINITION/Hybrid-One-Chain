@@ -34,11 +34,13 @@ class RSA_Cipher:
     
     def __init__(self):
         pass
-    
-    def encrypt(self):
-        privateKeyBytes = open('rsa\\private.pem', 'rb').read()
-        rsa.PublicKey.load_pkcs1_openssl_pem(keyfile=privateKeyBytes)
 
-    def decrypt(self):
-        publicKeyBytes = open('rsa\\receiver.pem', 'rb').read()
-        rsa.PrivateKey._load_pkcs1_pem(keyfile=publicKeyBytes)
+    def encrypt(self):
+        privateKeyBytes = open('rsa\\private.pem', 'r', encoding='utf-8').read()
+        privateKey = rsa.PrivateKey._load_pkcs1_pem(keyfile=privateKeyBytes)
+        encrypted = rsa.encrypt('123'.encode('utf-8'), privateKey)
+        print(base64.b64encode(encrypted).decode('utf-8'))
+
+    def decrypt(self, data):
+        privateKeyBytes = open('rsa\\private.pem', 'rb').read()
+        privateKey = rsa.PublicKey.load_pkcs1_openssl_pem(keyfile=privateKeyBytes)
