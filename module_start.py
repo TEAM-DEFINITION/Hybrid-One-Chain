@@ -63,5 +63,10 @@ if __name__== "__main__":
     uvicorn.run("module_start:app", host="0.0.0.0", port=55555, reload=True)
 
 # 로컬 자동 시작 // 127.0.0.1:8000 or 10.0.2.2:8000
+<<<<<<< HEAD
 #if __name__== "__main__":
 #    uvicorn.run("module_start:app", reload=True)
+=======
+if __name__== "__main__":
+    uvicorn.run("module_start:app", reload=True)
+>>>>>>> 7a4316da80c28040f61ba01b23d745d7cbd5fe78
