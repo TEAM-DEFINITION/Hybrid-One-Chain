@@ -33,7 +33,7 @@ app.add_middleware(
 # Access API Management
 # Signup API
 @app.post("/app/signup")
-async def appSignup(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), clientrandom:str=Form(...), publickey:str=For(...)):
+async def appSignup(request:Request, user_id:str=Form(...), user_pwd:str=Form(...), clientrandom:str=Form(...), publickey:str=Form(...)):
     print(publickey)
     result = USER().genesis_block_create(user_id,user_pwd, clientrandom)
     return result
