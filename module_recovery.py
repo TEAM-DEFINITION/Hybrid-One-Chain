@@ -1,6 +1,6 @@
 
 
-class RECOVERY() :
+class RECOVERY():
 
     def userAll(self,):
         pass
@@ -8,7 +8,8 @@ class RECOVERY() :
     def userPart(self,):
         pass
 
-class LOGING() :
+
+class LOGING():
 
     def decryptError(self,):
         pass
